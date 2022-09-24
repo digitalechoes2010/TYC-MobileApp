@@ -1,0 +1,10 @@
+{
+  "ios": {
+    "name": "tycMobile",
+    "displayName": "TapYourChip"
+  },
+  "android": {
+    "name": "tyc",
+    "displayName": "TapYourChip"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "200805530561",
+    "project_id": "tyc-project",
+    "storage_bucket": "tyc-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:200805530561:android:2ed9fa7c6eba52baeb8d40",
+        "android_client_info": {
+          "package_name": "com.tyc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "200805530561-clvgcv2d8dsdb9tddkci9prskm303tc1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tyc",
+            "certificate_hash": "24bc7a907cc9741b967c9eaa813f2ac47005b8b5"
+          }
+        },
+        {
+          "client_id": "200805530561-vmgge93cu39mjc3cl9boot1js38c3pur.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tyc",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "200805530561-q27t15jbq7ost0h283c0mk6tcisrnesn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGYnvVE9oIRg1l2j3imhlDkALz5bZXlbs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "200805530561-q27t15jbq7ost0h283c0mk6tcisrnesn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "200805530561-ukvm0053geq1dbu5ef8idav4vgeq3r2s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.tyc.tycMobile"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

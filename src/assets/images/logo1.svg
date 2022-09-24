@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 138.1104 110.5317">
+    <defs>
+        <clipPath id="clip-path">
+            <polygon id="SVGID" points="48.381 60.993 54.892 65.919 119.705 36.932 48.381 60.993" style="fill:none" />
+        </clipPath>
+        <linearGradient id="linear-gradient" x1="-892.7081" y1="581.0522" x2="-891.6831" y2="581.0522" gradientTransform="matrix(55.1972, -26.9986, -26.9986, -55.1972, 65015.6495, 8037.1311)" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#f9d62c" />
+            <stop offset="1" stop-color="#f04a23" />
+        </linearGradient>
+        <clipPath id="clip-path-2">
+            <path id="SVGID-2" data-name="SVGID" d="M107.6567,44.7967,63.6815,73.5106c3.88,2.6031,15.8536,10.6263,19.9148,13.3477,4.2373-5.8592,32.6461-45.14,36.1074-49.9279Z" style="fill:none" />
+        </clipPath>
+        <linearGradient id="linear-gradient-2" x1="-892.7179" y1="581.1496" x2="-891.6871" y2="581.1496" gradientTransform="matrix(55.1972, -26.9986, -26.9986, -55.1972, 65023.8884, 8053.9752)" xlink:href="#linear-gradient" />
+    </defs>
+    <g id="Layer_2" data-name="Layer 2">
+        <g id="Layer_1-2" data-name="Layer 1">
+            <g style="clip-path:url(#clip-path)">
+                <polygon points="37.694 42.528 105.935 6.792 130.391 60.323 62.151 96.059 37.694 42.528" style="fill:url(#linear-gradient)" />
+            </g>
+            <g style="clip-path:url(#clip-path-2)">
+                <polygon points="45.275 46.57 108.888 13.257 138.11 77.219 74.497 110.532 45.275 46.57" style="fill:url(#linear-gradient-2)" />
+            </g>
+            <path d="M95.804,16.6385c3.43-5.0144,19.0648-2.1838,23.9008-2.875V.0783c-6.02.396-19.5374-1.2085-24.9684,1.8254-15.7175,6.3934-18.005,31.4774-3.749,40.9791l.001.0011c.0014-.0027,28.7159-9.6828,28.7164-9.6895-2.72-.2891-18.8708.7275-21.0464-.7756-5.7809-2.4732-7.44-11.2094-2.8544-15.78" style="fill:#9c509f" />
+            <path d="M70.7248.0788,59.4778,30.3677C59.1537,29.4916,47.9544-.3461,48.0592.0788H0V13.764H17.0441V68.1811l12.7815-4.313V13.764H40.4769L53.2585,46.8791,49.3737,57.2743l14.6194-4.9328L83.5074.0788Z" style="fill:#9c509f" />
+        </g>
+    </g>
+</svg>

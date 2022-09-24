@@ -1,0 +1,5 @@
+//Login
+export const AUTHENTICATED = 'AUTHENTICATED';
+export const UNVERIFIED = 'UNVERIFIED';
+export const UNAUTHENTICATED = 'UNAUTHENTICATED';
+export const RESET_STORE = 'RESET_STORE';

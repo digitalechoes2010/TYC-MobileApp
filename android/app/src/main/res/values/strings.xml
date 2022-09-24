@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TapYourChip</string>
+    <string name="fb_app_id">4389598784461723</string>
+    <string name="fb_login_protocol_scheme">fb4389598784461723</string>
+</resources>
