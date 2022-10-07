@@ -171,7 +171,7 @@ const BusinessCardDetails = ({inputData, handleUpdate, isOwn}: any) => {
                 <Button
                   mode={'contained'}
                   contentStyle={styles.buttonContent}
-                  // style={[styles.button, {width: '80%'}]}
+                  style={styles.button}
                   labelStyle={styles.buttonLabel}
                   color={theme.colors.textDark}
                   onPress={handleSubmit}>

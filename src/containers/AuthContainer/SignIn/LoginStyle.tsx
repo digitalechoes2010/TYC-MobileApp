@@ -87,11 +87,11 @@ const styles = StyleSheet.create({
   //   fontWeight: 'bold',
   //   fontSize: metrics.moderateScale(23),
   // },
-  // mdCOntainer: {
-  //   flexDirection: 'row',
-  //   justifyContent: 'space-between',
-  //   marginTop: 10,
-  // },
+  mdCOntainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 10,
+  },
   // txtCon: {
   //   flexDirection: 'row',
   //   marginBottom: metrics.moderateScale(5),
@@ -152,13 +152,13 @@ const styles = StyleSheet.create({
   //   height: metrics.moderateScale(45),
   // },
 
-  // addMediaBtn: {
-  //   justifyContent: 'center',
-  //   borderRadius: 100,
-  //   backgroundColor: theme.colors.primary,
-  //   width: metrics.moderateScale(100),
-  //   height: metrics.moderateScale(35),
-  // },
+  addMediaBtn: {
+    justifyContent: 'center',
+    borderRadius: 100,
+    backgroundColor: theme.colors.primary,
+    width: metrics.moderateScale(100),
+    height: metrics.moderateScale(35),
+  },
   // signIncontainer: {
   //   flex: 1,
   //   flexGrow: 1,
@@ -174,9 +174,9 @@ const styles = StyleSheet.create({
   //   flex: 0.9,
   // },
 
-  // inputContainerStyle: {
-  //   marginBottom: 10,
-  // },
+  inputContainerStyle: {
+    marginBottom: 10,
+  },
   // logoContainerSignUp: {
   //   alignItems: 'center',
   //   // marginTop: metrics.verticalScale(40),
@@ -205,9 +205,9 @@ const styles = StyleSheet.create({
   //   paddingHorizontal: metrics.moderateScale(20),
   //   marginBottom: metrics.verticalScale(20),
   // },
-  // scrollHeight: {
-  //   height: metrics.moderateScale(400),
-  // },
+  scrollHeight: {
+    height: metrics.moderateScale(400),
+  },
   // formContainer2: {
   //   // paddingHorizontal: ,
   //   marginVertical: 0,
@@ -245,12 +245,12 @@ const styles = StyleSheet.create({
   //   paddingHorizontal: metrics.moderateScale(20),
   //   paddingVertical: metrics.verticalScale(5),
   // },
-  // button: {
-  //   alignSelf: 'center',
-  //   borderRadius: 25,
-  //   marginBottom: metrics.verticalScale(10),
-  //   width: '80%',
-  // },
+  button: {
+    alignSelf: 'center',
+    borderRadius: 25,
+    marginVertical: metrics.verticalScale(10),
+    width: '80%',
+  },
   // buttonLabel: {
   //   color: theme.colors.background,
   //   textTransform: 'uppercase',

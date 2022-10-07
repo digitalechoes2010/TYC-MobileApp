@@ -187,7 +187,7 @@ const BusinessComponent = (props: any) => {
   return (
     <>
       <View style={{padding: 10, backgroundColor: 'black'}}>
-        <View style={styles.txtContainer}>
+        <View>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <MIcon
               name={'link-variant'}
@@ -230,6 +230,8 @@ const BusinessComponent = (props: any) => {
             />
             <Text style={{color: 'white', marginLeft: 10}}>{makeLink(props.profileData)}</Text>
           </View>
+          </View>
+          
           <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 10}}>
             <IIcon
               name={'location'}
@@ -238,24 +240,22 @@ const BusinessComponent = (props: any) => {
             />
             <Text style={{color: 'white', marginLeft: 10}}>{inputData.address}</Text>
           </View>
-
-          <View style={styles.editIconView}>
             <TouchableOpacity
               onPress={() => showDialog('BCARD')}
-              style={{marginTop: 10}}>
-              <View>
+              style={{marginTop: 5, padding: 2.5, borderRadius:100, backgroundColor: theme.colors.secondary, alignSelf: 'flex-end'}}>
                 <MIcon
                   name={'square-edit-outline'}
                   color={'white'}
                   size={metrics.moderateScale(22)}
                 />
-              </View>
             </TouchableOpacity>
-          </View>
         </View>
+        <View style={{paddingHorizontal: 10}}>
+
+       
 
         <View style={styles.mdCOntainer}>
-          <Text style={{color: 'white', marginVertical: 10}}>Media</Text>
+          <Text style={{color: 'black', fontSize: 20, fontWeight: 'bold', marginVertical: 10}}>Media</Text>
           {props.type != 'ctUserData' &&
             (isUploading ? (
               <TouchableOpacity
@@ -303,8 +303,9 @@ const BusinessComponent = (props: any) => {
               );
             })}
         </View>
-        <Text style={{color: 'white', marginTop: 10}}>Links</Text>
-      </View>
+        <Text style={{color: 'black', fontSize: 20, fontWeight: 'bold', marginVertical: 10}}>Links</Text>
+        </View>
+   
       <Portal>
         <Dialog
           visible={showItem}
