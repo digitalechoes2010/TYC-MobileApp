@@ -141,7 +141,7 @@ class Contacts extends Component<any, any> {
           <View style={styles.dataList}>
             <Text style={{fontWeight: 'bold'}}>{item.userName}</Text>
             <Text lineBreakMode={'tail'} style={{marginTop: 5}}>
-              <Text style={{fontWeight: 'bold'}}>location:</Text>{' '}
+              <Text style={{fontWeight: 'bold'}}>Location:</Text>{' '}
               {item.location}
             </Text>
           </View>
