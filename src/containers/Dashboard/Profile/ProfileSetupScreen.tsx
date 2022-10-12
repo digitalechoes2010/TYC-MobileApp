@@ -206,7 +206,7 @@ class ProfileSetupScreen extends Component<any, any> {
     console.log("ADDRESS", address);
     console.log("User BIO", userBio);
     await this.props.doUserUpdate(updatedObject);
-    Alert.alert('Success', 'Your information has been updated');
+    Alert.alert('Success', 'Information Successfully Updated.');
   };
 
   handleSubmit = (values: any) => {

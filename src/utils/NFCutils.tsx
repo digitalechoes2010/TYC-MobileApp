@@ -49,7 +49,7 @@ const handleException = ex => {
   if (ex instanceof NfcError.UserCancel) {
     // bypass
   } else if (ex instanceof NfcError.Timeout) {
-    Alert.alert('NFC Session Timeout');
+    Alert.alert('NFC Session Timeout.');
   } else {
     console.warn(ex);
 

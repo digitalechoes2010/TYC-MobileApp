@@ -57,7 +57,7 @@ class CustomDrawer extends React.Component<any, any> {
           }
         })
         .catch((error: any) => {
-          Alert.alert('error', 'Something went wrong');
+          Alert.alert('Error', 'Something Went Wrong.');
           
         })
         .finally(() => {

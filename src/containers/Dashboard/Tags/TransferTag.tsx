@@ -42,12 +42,12 @@ const TransferTag = ({navigation}: any) => {
           setTimeoutInSeconds(res.timeoutInSeconds);
           setshowCountDown(true);
         } else {
-          Alert.alert('error', res.message);
+          Alert.alert('Error', res.message);
         }
       })
       .catch((error: any) => {
         // setLoading(false);
-        Alert.alert('error', 'Something went wrong');
+        Alert.alert('Error', 'Something Went Wrong.');
       })
       .finally(() => {
         setLoading(false);

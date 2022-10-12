@@ -78,7 +78,7 @@ class OTPSigninScreenEmail extends Component<any, any> {
       })
       .catch((error: any) => {
         this.setState({isLoading: false}, () =>
-          Alert.alert('error', 'Something went wrong'),
+          Alert.alert('Error', 'Something Went Wrong.'),
         );
         console.log(error);
       });
@@ -94,7 +94,7 @@ class OTPSigninScreenEmail extends Component<any, any> {
         countryCode: this.state.countryCode,
       });
     } else {
-      Alert.alert('error', 'Please enter the OTP');
+      Alert.alert('Error', 'Please Enter OTP.');
     }
   };
 

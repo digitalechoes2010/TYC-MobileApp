@@ -143,8 +143,8 @@ class DashBoardScreen extends Component<any, any> {
 
     if (check.data == null) {
       Alert.alert(
-        'ALERT!',
-        'You can only change this link once are you sure you want to proceed?',
+        'ALERT',
+        'You can only change this link once. Are you sure you want to proceed?',
         [
           {
             text: 'NO',
@@ -170,8 +170,8 @@ class DashBoardScreen extends Component<any, any> {
                 .catch((error: any) => {
                   console.log(error);
                   Alert.alert(
-                    'error',
-                    'Something went wrong. Please try again.',
+                    'Error',
+                    'Something Went Wrong. Please Try Again.',
                   );
                 })
                 .finally(() => {
@@ -183,8 +183,8 @@ class DashBoardScreen extends Component<any, any> {
       );
     } else {
       Alert.alert(
-        'error',
-        'This link is already taken please choose another one.',
+        'Error',
+        'Link Already Taken. Please Choose Another.',
       );
     }
   };

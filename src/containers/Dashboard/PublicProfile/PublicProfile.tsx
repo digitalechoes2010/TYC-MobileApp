@@ -49,7 +49,7 @@ const PublicProfile = ({navigation, route}: any) => {
   
   const openContactForm = (name: any, email: any, phone: any, address: any, countryCode: any) => {
     
-    if (email !== null && email.length !== 0 && phone !== null && phone.length !== 0 && address !== null && address.length !== 0) {
+    if (email && phone && address) {
       let diallingCode = '';
       countryCodes.map((countryCodeDial: any) => {
         if(countryCodeDial.isoCode2 === countryCode)
@@ -71,9 +71,9 @@ const PublicProfile = ({navigation, route}: any) => {
       let splitedCountryCode = removeFirstWord(fourthPartAddress);
 
       var newPerson = {
-        displayName: name,
-        familyName: removeFirstWord(name),
-        givenName: removeLastWord(name),
+        displayName: name !== userData.username ? name : userData.username[0].toUpperCase() + userData.username.substring(1) + ' ' + userData.username[0].toUpperCase() + userData.username.substring(1),
+        familyName: name !== userData.username ? removeFirstWord(name) : userData.username[0].toUpperCase() + userData.username.substring(1),
+        givenName: name !== userData.username ? removeLastWord(name) : userData.username[0].toUpperCase() + userData.username.substring(1),
         emailAddresses: [
           {
             label: 'Other',
@@ -95,7 +95,7 @@ const PublicProfile = ({navigation, route}: any) => {
           country: splitedCountryCode,
         }],
       } 
-    } else if (email !== null && email.length !== 0 && phone !== null && phone.length !== 0) {
+    } else if (email && phone) {
       let diallingCode = '';
       countryCodes.map((countryCodeDial: any) => {
         if(countryCodeDial.isoCode2 === countryCode)
@@ -104,9 +104,9 @@ const PublicProfile = ({navigation, route}: any) => {
       })
       
       var newPerson = {
-        displayName: name,
-        familyName: removeFirstWord(name),
-        givenName: removeLastWord(name),
+        displayName: name !== userData.username ? name : userData.username[0].toUpperCase() + userData.username.substring(1) + ' ' + userData.username[0].toUpperCase() + userData.username.substring(1),
+        familyName: name !== userData.username ? removeFirstWord(name) : userData.username[0].toUpperCase() + userData.username.substring(1),
+        givenName: name !== userData.username ? removeLastWord(name) : userData.username[0].toUpperCase() + userData.username.substring(1),
         emailAddresses: [
           {
             label: 'Other',
@@ -120,7 +120,7 @@ const PublicProfile = ({navigation, route}: any) => {
           },
         ],
       } 
-    } else if (email !== null && email.length !== 0 && address !== null && address.length !== 0) {
+    } else if (email && address) {
       let fullAddress = address;
       let fullAddressArray = fullAddress.split(',');
       let firstPartAddress = fullAddressArray[0];
@@ -135,9 +135,9 @@ const PublicProfile = ({navigation, route}: any) => {
       let splitedCountryCode = removeFirstWord(fourthPartAddress);
       
       var newPerson = {
-        displayName: name,
-        familyName: removeFirstWord(name),
-        givenName: removeLastWord(name),
+        displayName: name !== userData.username ? name : userData.username[0].toUpperCase() + userData.username.substring(1) + ' ' + userData.username[0].toUpperCase() + userData.username.substring(1),
+        familyName: name !== userData.username ? removeFirstWord(name) : userData.username[0].toUpperCase() + userData.username.substring(1),
+        givenName: name !== userData.username ? removeLastWord(name) : userData.username[0].toUpperCase() + userData.username.substring(1),
         emailAddresses: [
           {
             label: 'Other',
@@ -153,7 +153,7 @@ const PublicProfile = ({navigation, route}: any) => {
           country: splitedCountryCode,
         }],
       } 
-    } else if (phone !== null && phone.length !== 0 && address !== null && address.length !== 0) {
+    } else if (phone && address) {
       let diallingCode = '';
       countryCodes.map((countryCodeDial: any) => {
         if(countryCodeDial.isoCode2 === countryCode)
@@ -175,9 +175,9 @@ const PublicProfile = ({navigation, route}: any) => {
       let splitedCountryCode = removeFirstWord(fourthPartAddress);
       
       var newPerson = {
-        displayName: name,
-        familyName: removeFirstWord(name),
-        givenName: removeLastWord(name),
+        displayName: name !== userData.username ? name : userData.username[0].toUpperCase() + userData.username.substring(1) + ' ' + userData.username[0].toUpperCase() + userData.username.substring(1),
+        familyName: name !== userData.username ? removeFirstWord(name) : userData.username[0].toUpperCase() + userData.username.substring(1),
+        givenName: name !== userData.username ? removeLastWord(name) : userData.username[0].toUpperCase() + userData.username.substring(1),
         phoneNumbers: [
           {
             label: 'Mobile',
@@ -193,11 +193,11 @@ const PublicProfile = ({navigation, route}: any) => {
           country: splitedCountryCode,
         }],
       } 
-    } else if (email !== null && email.length !== 0) {
+    } else if (email) {
       var newPerson = {
-        displayName: name,
-        familyName: removeFirstWord(name),
-        givenName: removeLastWord(name),
+        displayName: name !== userData.username ? name : userData.username[0].toUpperCase() + userData.username.substring(1) + ' ' + userData.username[0].toUpperCase() + userData.username.substring(1),
+        familyName: name !== userData.username ? removeFirstWord(name) : userData.username[0].toUpperCase() + userData.username.substring(1),
+        givenName: name !== userData.username ? removeLastWord(name) : userData.username[0].toUpperCase() + userData.username.substring(1),
         emailAddresses: [
           {
             label: 'Other',
@@ -205,7 +205,7 @@ const PublicProfile = ({navigation, route}: any) => {
           },
         ],
       } 
-    } else if (phone !== null && phone.length !== 0) {
+    } else if (phone) {
       let diallingCode = '';
       countryCodes.map((countryCodeDial: any) => {
         if(countryCodeDial.isoCode2 === countryCode)
@@ -214,9 +214,9 @@ const PublicProfile = ({navigation, route}: any) => {
       })
       
       var newPerson = {
-        displayName: name,
-        familyName: removeFirstWord(name),
-        givenName: removeLastWord(name),
+        displayName: name !== userData.username ? name : userData.username[0].toUpperCase() + userData.username.substring(1) + ' ' + userData.username[0].toUpperCase() + userData.username.substring(1),
+        familyName: name !== userData.username ? removeFirstWord(name) : userData.username[0].toUpperCase() + userData.username.substring(1),
+        givenName: name !== userData.username ? removeLastWord(name) : userData.username[0].toUpperCase() + userData.username.substring(1),
         phoneNumbers: [
           {
             label: 'Mobile',
@@ -224,7 +224,7 @@ const PublicProfile = ({navigation, route}: any) => {
           },
         ],
       } 
-    } else if (address !== null && address.length !== 0) {
+    } else if (address) {
       let fullAddress = address;
       let fullAddressArray = fullAddress.split(',');
       let firstPartAddress = fullAddressArray[0];
@@ -239,9 +239,9 @@ const PublicProfile = ({navigation, route}: any) => {
       let splitedCountryCode = removeFirstWord(fourthPartAddress);
 
       var newPerson = {
-        displayName: name,
-        familyName: removeFirstWord(name),
-        givenName: removeLastWord(name),
+        displayName: name !== userData.username ? name : userData.username[0].toUpperCase() + userData.username.substring(1) + ' ' + userData.username[0].toUpperCase() + userData.username.substring(1),
+        familyName: name !== userData.username ? removeFirstWord(name) : userData.username[0].toUpperCase() + userData.username.substring(1),
+        givenName: name !== userData.username ? removeLastWord(name) : userData.username[0].toUpperCase() + userData.username.substring(1),
         postalAddresses: [{
           label: 'Home',
           street: splitedStreet,
@@ -253,9 +253,9 @@ const PublicProfile = ({navigation, route}: any) => {
       } 
     } else {
       var newPerson = {
-        displayName: name,
-        familyName: removeFirstWord(name),
-        givenName: removeLastWord(name),
+        displayName: name !== userData.username ? name : userData.username[0].toUpperCase() + userData.username.substring(1) + ' ' + userData.username[0].toUpperCase() + userData.username.substring(1),
+        familyName: name !== userData.username ? removeFirstWord(name) : userData.username[0].toUpperCase() + userData.username.substring(1),
+        givenName: name !== userData.username ? removeLastWord(name) : userData.username[0].toUpperCase() + userData.username.substring(1),
       }
     };
 
@@ -357,14 +357,14 @@ const PublicProfile = ({navigation, route}: any) => {
           </View>
         </View>
         <View style={dashboardStyles.userInfo}>
-          <Text style={[dashboardStyles.userName, {textAlign: 'center'}]}>
+          <Text style={[dashboardStyles.userName, {textAlign: 'center', textTransform: 'capitalize', marginTop: 10}]}>
             {userData.name ?? userData.username}
           </Text>
           <TouchableOpacity
             disabled={userData ? false : true}
             onPress={() =>
               openContactForm(
-                userData.name ?? userData.username[0].toUpperCase() + userData.username.substring(1),
+                userData.name ?? userData.username,
                 userData.email,
                 userData.userBio,
                 userData.address,

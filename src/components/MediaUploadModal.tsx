@@ -23,7 +23,7 @@ const MediaUploadModal = (props: any) => {
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
+          Alert.alert('Modal Closed.');
           setModalVisible(!modalVisible);
         }}>
         <View style={styles.centeredView}>

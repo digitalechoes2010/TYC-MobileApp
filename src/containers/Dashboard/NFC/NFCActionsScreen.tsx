@@ -56,10 +56,10 @@ class NFCActionsScreen extends Component<any, any> {
           if (Platform.OS === 'android') {
             Alert.alert(
               'NFC',
-              'Plese enable NFC',
+              'Please Enable NFC.',
               [
                 {
-                  text: 'Go to settings',
+                  text: 'Go To Settings',
                   onPress: async () => {
                     await NfcManager.goToNfcSetting();
                     resolve(true);
@@ -68,7 +68,7 @@ class NFCActionsScreen extends Component<any, any> {
                 {
                   text: 'No',
                   onPress: () => {
-                    reject('Plese enable NFC');
+                    reject('Please Enable NFC.');
                   },
                   style: 'cancel',
                 },
@@ -135,7 +135,7 @@ class NFCActionsScreen extends Component<any, any> {
             NfcEvents.DiscoverTag,
             async (tag: any) => {
               tagFound = tag;
-              NfcManager.setAlertMessage('NDEF tag found');
+              NfcManager.setAlertMessage('NDEF Tag Found');
               NfcManager.unregisterTagEvent().catch(() => 0);
               resolve(tag.id);
             },
@@ -144,7 +144,7 @@ class NFCActionsScreen extends Component<any, any> {
           NfcManager.setEventListener(NfcEvents.SessionClosed, () => {
             this.cleanUp();
             if (!tagFound) {
-              reject('Tag not Found');
+              reject('Tag Not Found');
             }
           });
 
@@ -199,10 +199,10 @@ class NFCActionsScreen extends Component<any, any> {
       console.log('error error', error);
 
       if (typeof error == 'string') {
-        Alert.alert('error', error);
+        Alert.alert('Error', error);
       } else if (error == false) {
       } else {
-        Alert.alert('error', 'Unable to process! Try again.');
+        Alert.alert('Error', 'Unable To Process. Try Again.');
       }
       this.props.navigation.goBack();
     }

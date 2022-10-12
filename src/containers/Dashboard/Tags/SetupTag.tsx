@@ -46,10 +46,10 @@ const SetupTag = ({navigation}: any) => {
           if (Platform.OS === 'android') {
             Alert.alert(
               'NFC',
-              'Plese enable NFC',
+              'Please Enable NFC.',
               [
                 {
-                  text: 'Go to settings',
+                  text: 'Go To Settings',
                   onPress: async () => {
                     await NfcManager.goToNfcSetting();
                     resolve(true);
@@ -58,7 +58,7 @@ const SetupTag = ({navigation}: any) => {
                 {
                   text: 'No',
                   onPress: () => {
-                    reject('Plese enable NFC');
+                    reject('Please Enable NFC.');
                   },
                   style: 'cancel',
                 },
@@ -167,21 +167,21 @@ const SetupTag = ({navigation}: any) => {
           } else if (res.status == 'USER_TRANSFER_ON') {
             transferTag(serialNo);
           } else {
-            Alert.alert('error', res.message);
+            Alert.alert('Error', res.message);
           }
         })
         .catch((error: any) => {
           setLoading({...isLoading, verify: false});
-          Alert.alert('error', 'Something went wrong');
+          Alert.alert('Error', 'Something Went Wrong.');
         });
     } catch (error) {
       setLoading({...isLoading, verify: false});
       setShowTag(false);
       if (typeof error == 'string') {
-        Alert.alert('error', error);
+        Alert.alert('Error', error);
       } else if (error == false) {
       } else {
-        Alert.alert('error', 'Unable to process! Try again.');
+        Alert.alert('Error', 'Unable To Process. Try Again.');
       }
     } finally {
       setShowTag(false);
@@ -201,12 +201,12 @@ const SetupTag = ({navigation}: any) => {
           console.log(data);
           Alert.alert('Success', data.data.message);
         } else {
-          Alert.alert('error', data.data.message);
+          Alert.alert('Error', data.data.message);
         }
       })
       .catch((error: any) => {
-        console.log('error', error.message);
-        Alert.alert('error', 'Something went wrong');
+        console.log('Error', error.message);
+        Alert.alert('Error', 'Something Went Wrong.');
       });
   };
 
@@ -223,13 +223,13 @@ const SetupTag = ({navigation}: any) => {
           console.log(data);
           Alert.alert('Success', data.data.message);
         } else {
-          Alert.alert('error', data.data.message);
+          Alert.alert('Error', data.data.message);
         }
       })
       .catch((error: any) => {
         setShowTag(false);
-        console.log('error', error.message);
-        Alert.alert('error', 'Something went wrong');
+        console.log('Error', error.message);
+        Alert.alert('Error', 'Something Went Wrong.');
       });
   };
 

@@ -66,7 +66,7 @@ class SignupScreen extends Component<ISignupProps, any> {
         this.props.navigation.navigate('OTPAuthEmail');
       } else {
         this.props.disableLoader();
-        Alert.alert('error', 'Email already registerd. Please login!');
+        Alert.alert('Error', 'Email Already Exists. Please Login.');
       }
     }
   };

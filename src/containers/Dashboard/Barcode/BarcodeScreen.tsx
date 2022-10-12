@@ -37,7 +37,7 @@ export default class BarcodeScreen extends Component<any, any> {
       const strsplit = str.split('/');
       console.log('strsplit', strsplit);
       if (strsplit.length != 5) {
-        throw 'Please scan a valif TYC QR Code';
+        throw 'Please scan a valid TYC QR Code';
       }
       const validateData = await schema.isValid({
         url: str,
@@ -151,7 +151,7 @@ export default class BarcodeScreen extends Component<any, any> {
             });
           }}
           onTouchStart={() => {
-            Alert.alert('start');
+            Alert.alert('START');
           }}
         />
       </View>

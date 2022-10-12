@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Image} from 'react-native';
+import {StyleSheet, View, Image, TouchableOpacity, Platform, Linking} from 'react-native';
 import MapView, {Callout, Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import ApiConfig from '../../../config/apiConfig';
 import apiClient from '../../../config/clients';
+import metrics from '../../../utils/metrics';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 const styles = StyleSheet.create({
   container: {
@@ -35,6 +37,11 @@ export default class Maps extends Component<any, any> {
     super(props);
     this.state = {
       contacts: [],
+      markerDirections: false,
+      markerLat: '',
+      markerLong: '',
+      markerLabel: '',
+      markerId: '',
     };
   }
 
@@ -85,10 +92,24 @@ export default class Maps extends Component<any, any> {
       });
   }
 
+  onDirectionButton(latitude: any, longitude: any, label: any) {
+    const lat = latitude;
+    const lng = longitude;
+    const scheme = Platform.select({ios: 'maps:0,0?q=', android: 'geo:0,0?q='});
+    const latLng = `${lat},${lng}`;
+    const customLabel = label;
+    const url = Platform.select({
+      ios: `${scheme}${customLabel}@${latLng}`,
+      android: `${scheme}${latLng}(${customLabel})`,
+    });
+
+    Linking.openURL(url);
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <MapView provider={PROVIDER_GOOGLE} style={styles.map}>
+        <MapView provider={PROVIDER_GOOGLE} style={styles.map} toolbarEnabled={false}>
           {this.state.contacts.map((c: any, index: any) => (
             <Marker
               key={index}
@@ -98,9 +119,7 @@ export default class Maps extends Component<any, any> {
               }}
               style={styles.marker}
               onPress={() =>
-                this.props.navigation.navigate('PublicProfile', {
-                  userId: c.userId,
-                })
+                this.setState({markerDirections: true, markerLat: c.lat, markerLong: c.lng, markerLabel: c.userName, markerId: c.userId})
               }>
               <View style={styles.markerImageContainer}>
                 <Image
@@ -121,6 +140,47 @@ export default class Maps extends Component<any, any> {
             </Marker>
           ))}
         </MapView>
+        {this.state.markerDirections === true ? 
+          <>
+            <TouchableOpacity
+              onPress={() => this.onDirectionButton(this.state.markerLat, this.state.markerLong, this.state.markerLabel)}
+              style={{
+                bottom: '5%',
+                right: '5%',
+                position: 'absolute',
+                zIndex: 1,
+                backgroundColor: 'white',
+                padding: '2%',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <FontAwesome5
+                name="directions"
+                size={metrics.moderateScale(20)}
+                color="#FB8C1A" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate('PublicProfile', {
+                userId: this.state.markerId,
+              })}
+              style={{
+                bottom: '5%',
+                right: '17.5%',
+                position: 'absolute',
+                zIndex: 1,
+                backgroundColor: 'white',
+                padding: '2%',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+                <FontAwesome5
+                  name="user-alt"
+                  size={metrics.moderateScale(20)}
+                  color="#FB8C1A" />
+              </TouchableOpacity>
+            </>
+          : null
+        }
       </View>
     );
   }

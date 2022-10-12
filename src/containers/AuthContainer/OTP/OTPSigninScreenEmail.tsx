@@ -44,7 +44,7 @@ class OTPSigninScreen extends Component<any, any> {
         otp: this.state.OTP,
       });
     } else {
-      Alert.alert('error', 'Please enter the OTP');
+      Alert.alert('Error', 'Please Enter OTP.');
     }
   };
 

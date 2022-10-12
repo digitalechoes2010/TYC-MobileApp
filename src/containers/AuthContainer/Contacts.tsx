@@ -7,7 +7,6 @@ import {
   StyleSheet,
   TouchableOpacity,
   View,
-  Platform
 } from 'react-native';
 import {Avatar, Badge, Card, Text} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -69,8 +68,8 @@ class Contacts extends Component<any, any> {
             return {
               userId: e.contactId,
               userName:
-                e.contactUserDetails?.name ?? e.contactUserDetails?.username,
-              location: e.contactUserDetails.address,
+                e.contactUserDetails?.name ?? e.contactUserDetails?.username[0].toUpperCase() + e.contactUserDetails?.username.substring(1),
+              location: e.tapAddress,
               lat: e?.location.lat,
               lng: e?.location.long,
               profilePic: e.contactUserDetails?.profilePic,
@@ -103,28 +102,6 @@ class Contacts extends Component<any, any> {
       });
   };
 
-  removeFirstWord = (string: any) => {
-    const indexOfSpace = string.indexOf(' ');
-
-    if (indexOfSpace === -1) {
-      return '';
-    }
-
-    return string.substring(indexOfSpace + 1);
-  };
-
-  openMap = async (street: any, city: any, zipCode: any) => {
-    const destination = encodeURIComponent(`${street} ${zipCode}, ${city}`);
-    const provider = Platform.OS === 'ios' ? 'apple' : 'google';
-    const link = `http://maps.${provider}.com/?daddr=${destination}`;
-    try {
-      const supported = await Linking.canOpenURL(link);
-      if (supported) Linking.openURL(link);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   renderItemComponent = (item: datatype) => (
     <TouchableOpacity
       style={styles.container}
@@ -135,7 +112,7 @@ class Contacts extends Component<any, any> {
         <Card.Content style={styles.content}>
           <Avatar.Image
             source={{
-              uri: item.profilePic ?? 'https://i.pravatar.cc/300',
+              uri: item.profilePic ? item.profilePic : 'https://i.pravatar.cc/300',
             }}
           />
           <View style={styles.dataList}>
@@ -147,10 +124,8 @@ class Contacts extends Component<any, any> {
           </View>
           <TouchableOpacity
             onPress={() => {
-              this.openMap(
-                item.location.split(',')[0],
-                this.removeFirstWord(item.location.split(',')[1]),
-                item.location.split(',')[2].split(' ').pop(),
+              Linking.openURL(
+                `https://www.google.com/maps/search/?api=1&query=${item.lat},${item.lng}`,
               );
             }}>
             <Avatar.Icon
@@ -179,7 +154,7 @@ class Contacts extends Component<any, any> {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <Text style={{color: '#000'}}>No data found</Text>
+            <Text style={{color: '#000'}}>No Data Found</Text>
           </View>
         ) : (
           <FlatList
@@ -220,6 +195,7 @@ const styles = StyleSheet.create({
   content: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center'
   },
   avatar: {},
   dataList: {
