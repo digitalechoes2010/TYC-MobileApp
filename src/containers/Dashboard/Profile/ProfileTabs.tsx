@@ -35,7 +35,12 @@ import * as yup from 'yup';
 import * as Icons from '../../../assets/images/icons/icon';
 import {ScrollView} from 'react-native-gesture-handler';
 import BusinessComponent from './BusinessComponent';
+import Geocoder from 'react-native-geocoding';
+
 const yourModuleName = require('react-native-openanything');
+
+Geocoder.init("AIzaSyAQBIpYoqg-PiWDQg2nGT8bcgeCNz0LUzs");
+
 interface IPublicProfileDialog {
   selectedItem: any;
 }
@@ -213,15 +218,12 @@ class ProfileTabs extends Component<any, any> {
     dialCall(item.uri);
   }
   else if (item.name=='Address'){
-    let fullAddress = item.uri;
-    let fullAddressArray = fullAddress.split(',');
-    let firstPartAddress = fullAddressArray[0];
-    let secondPartAddress = fullAddressArray[1];
-    let thirdPartAddress = fullAddressArray[2];
-    let street = firstPartAddress;
-    let city = this.removeFirstWord(secondPartAddress);
-    let zipCode = thirdPartAddress.split(' ').pop();
-    this.openMap(street, city, zipCode);
+    Geocoder.from(item.uri)
+		.then(json => {
+			var location = json.results[0].geometry.location;
+      this.onDirectionButton(location.lat, location.lng, item.uri);
+		})
+		.catch(error => console.warn(error));
   }
   else {
    Linking.openURL(validURLS(item.uri,item.name));
@@ -229,26 +231,18 @@ class ProfileTabs extends Component<any, any> {
   }
   }
 
-  removeFirstWord = (string: any) => {
-    const indexOfSpace = string.indexOf(' ');
-  
-    if (indexOfSpace === -1) {
-      return '';
-    }
-  
-    return string.substring(indexOfSpace + 1);
-  }
+  onDirectionButton(latitude: any, longitude: any, label: any) {
+    const lat = latitude;
+    const lng = longitude;
+    const scheme = Platform.select({ios: 'maps:0,0?q=', android: 'geo:0,0?q='});
+    const latLng = `${lat},${lng}`;
+    const customLabel = label;
+    const url = Platform.select({
+      ios: `${scheme}${customLabel}@${latLng}`,
+      android: `${scheme}${latLng}(${customLabel})`,
+    });
 
-  openMap = async (street: any, city: any, zipCode: any) => {
-    const destination = encodeURIComponent(`${street} ${zipCode}, ${city}`);  
-    const provider = Platform.OS === 'ios' ? 'apple' : 'google'
-    const link = `http://maps.${provider}.com/?daddr=${destination}`;
-    try {
-      const supported = await Linking.canOpenURL(link);
-      if (supported) Linking.openURL(link);
-    } catch (error) {
-        console.log(error);
-    }
+    Linking.openURL(url);
   }
 
   handleDelete = () => {

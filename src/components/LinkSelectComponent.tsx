@@ -99,7 +99,7 @@ class LinkSelectComponent extends React.Component<any, any> {
       this.state.currentSocial.name == 'Email'
     ) {
       this.setState({
-        erroroflink: 'Invalid email address, please enter in correct format.',
+        erroroflink: 'Invalid Email Address. Please Enter Correct Format.',
         outline: 'red',
       });
     } else if (
@@ -108,7 +108,7 @@ class LinkSelectComponent extends React.Component<any, any> {
     ) {
       this.setState({
         erroroflink:
-          'Invalid Instagram Username, please enter in correct format.',
+          'Invalid Instagram Username. Please Enter Correct Format.',
         outline: 'red',
       });
     } else if (
@@ -117,7 +117,7 @@ class LinkSelectComponent extends React.Component<any, any> {
     ) {
       this.setState({
         erroroflink:
-          'Invalid Snapchat Username, please enter in correct format.',
+          'Invalid Snapchat Username. Please Enter Correct Format.',
         outline: 'red',
       });
     } else if (
@@ -125,7 +125,7 @@ class LinkSelectComponent extends React.Component<any, any> {
       this.state.currentSocial.name == 'Tiktok'
     ) {
       this.setState({
-        erroroflink: 'Invalid Tiktok Username, please enter in correct format.',
+        erroroflink: 'Invalid Tiktok Username. Please Enter Correct Format.',
         outline: 'red',
       });
     } else if (
@@ -134,7 +134,7 @@ class LinkSelectComponent extends React.Component<any, any> {
     ) {
       this.setState({
         erroroflink:
-          'Invalid Twitter Username, please enter in correct format.',
+          'Invalid Twitter Username. Please Enter Correct Format.',
         outline: 'red',
       });
     } else if (
@@ -144,7 +144,7 @@ class LinkSelectComponent extends React.Component<any, any> {
       this.state.currentSocial.name == 'Linkedin'
     ) {
       this.setState({
-        erroroflink: 'Invalid Linkedin Link, please enter in correct format.',
+        erroroflink: 'Invalid Linkedin Link. Please Enter Correct Format.',
         outline: 'red',
       });
     } else if (
@@ -154,7 +154,7 @@ class LinkSelectComponent extends React.Component<any, any> {
       this.state.currentSocial.name == 'Facebook'
     ) {
       this.setState({
-        erroroflink: 'Invalid Facebook Link, please enter in correct format.',
+        erroroflink: 'Invalid Facebook Link. Please Enter Correct Format.',
         outline: 'red',
       });
     } else if (
@@ -164,7 +164,7 @@ class LinkSelectComponent extends React.Component<any, any> {
       this.state.currentSocial.name == 'Youtube'
     ) {
       this.setState({
-        erroroflink: 'Invalid Youtube Link, please enter in correct format.',
+        erroroflink: 'Invalid Youtube Link. Please Enter Correct Format.',
         outline: 'red',
       });
     } else if (
@@ -174,7 +174,7 @@ class LinkSelectComponent extends React.Component<any, any> {
       this.state.currentSocial.name == 'Pinterest'
     ) {
       this.setState({
-        erroroflink: 'Invalid Pinterest Link, please enter in correct format.',
+        erroroflink: 'Invalid Pinterest Link. Please Enter Correct Format.',
         outline: 'red',
       });
     } else if (
@@ -182,7 +182,7 @@ class LinkSelectComponent extends React.Component<any, any> {
       this.state.currentSocial.name == 'Twitch'
     ) {
       this.setState({
-        erroroflink: 'Invalid Twitch username, please enter in correct format.',
+        erroroflink: 'Invalid Twitch Username. Please Enter Correct Format.',
         outline: 'red',
       });
     } else if (
@@ -192,38 +192,38 @@ class LinkSelectComponent extends React.Component<any, any> {
       this.state.currentSocial.name == 'Onlyfans'
     ) {
       this.setState({
-        erroroflink: 'Invalid Onlyfans Link, please enter in correct format.',
+        erroroflink: 'Invalid Onlyfans Link. Please Enter Correct Format.',
         outline: 'red',
       });
     } else if (
       !/^[0-9]{4,24}$/i.test(value) &&
       this.state.currentSocial.name == 'Whatsapp'
     ) {
-      this.setState({erroroflink: 'Invalid number ', outline: 'red'});
+      this.setState({erroroflink: 'Invalid Contact Number.', outline: 'red'});
     } else if (
       !/^[0-9]{4,24}$/i.test(value) &&
       this.state.currentSocial.name == 'Text'
     ) {
-      this.setState({erroroflink: 'Invalid number ', outline: 'red'});
+      this.setState({erroroflink: 'Invalid Contact Number.', outline: 'red'});
     } else if (
       !/^[0-9]{4,24}$/i.test(value) &&
       this.state.currentSocial.name == 'Call'
     ) {
-      this.setState({erroroflink: 'Invalid number ', outline: 'red'});
+      this.setState({erroroflink: 'Invalid Contact Number.', outline: 'red'});
     } else if (
       !/^[0-9]{4,24}$/i.test(value) &&
       this.state.currentSocial.name == 'Contact Card'
     ) {
-      this.setState({erroroflink: 'Invalid number ', outline: 'red'});
+      this.setState({erroroflink: 'Invalid Contact Number.', outline: 'red'});
 
     } else if (
-      !/^[a-zA-Z0-9\s]+\,\s[a-zA-Z0-9\s]+\,\s[a-zA-Z0-9\s]*$/i.test(
+      !/^[a-zA-Z0-9\s]+\,\s[a-zA-Z0-9\s]+\,\s[a-zA-Z\s]+\s[0-9]+\,\s[a-zA-Z\s]*$/i.test(
         value,
       ) && 
       this.state.currentSocial.name == 'Address'
      
     ) {
-      this.setState({erroroflink: 'Invalid address', outline: 'red'});
+      this.setState({erroroflink: 'Invalid Address.', outline: 'red'});
     } else if (
       !/^(https:\/\/open.spotify.com(.*))$/i.test(
         value,
@@ -231,7 +231,7 @@ class LinkSelectComponent extends React.Component<any, any> {
       this.state.currentSocial.name == 'Spotify'
     ) {
       this.setState({
-        erroroflink: 'Invalid Spotify Link, please enter in correct format.',
+        erroroflink: 'Invalid Spotify Link. Please Enter Correct Format.',
         outline: 'red',
       });
     } else if (
@@ -242,7 +242,7 @@ class LinkSelectComponent extends React.Component<any, any> {
     ) {
       this.setState({
         erroroflink:
-          'Invalid Apple Music Link, please enter in correct format.',
+          'Invalid Apple Music Link. Please Enter Correct Format.',
         outline: 'red',
       });
     } else if (
@@ -252,7 +252,7 @@ class LinkSelectComponent extends React.Component<any, any> {
       this.state.currentSocial.name == 'Sound Cloud'
     ) {
       this.setState({
-        erroroflink: 'Invalid SoundCloud Link, please enter in correct format.',
+        erroroflink: 'Invalid Sound Cloud Link. Please Enter Correct Format.',
         outline: 'red',
       });
     } else if (
@@ -260,7 +260,7 @@ class LinkSelectComponent extends React.Component<any, any> {
       this.state.currentSocial.name == 'Paypal'
     ) {
       this.setState({
-        erroroflink: 'Invalid paypal link, please enter in correct format.',
+        erroroflink: 'Invalid Paypal Link. Please Enter Correct Format.',
         outline: 'red',
       });
     } else if (
@@ -268,7 +268,7 @@ class LinkSelectComponent extends React.Component<any, any> {
       this.state.currentSocial.name == 'Venmo'
     ) {
       this.setState({
-        erroroflink: 'Invalid Venmo Username, please enter in correct format.',
+        erroroflink: 'Invalid Venmo Username. Please Enter Correct Format.',
         outline: 'red',
       });
     } else if (
@@ -276,7 +276,7 @@ class LinkSelectComponent extends React.Component<any, any> {
       this.state.currentSocial.name == 'Cash App'
     ) {
       this.setState({
-        erroroflink: 'Invalid Cashtag, please enter in correct format. ',
+        erroroflink: 'Invalid Cash Tag. Please Enter Correct Format.',
         outline: 'red',
       });
     } else if (
@@ -286,7 +286,7 @@ class LinkSelectComponent extends React.Component<any, any> {
       this.state.currentSocial.name == 'Linktree'
     ) {
       this.setState({
-        erroroflink: 'Invalid Linktree Link, please enter in correct format.',
+        erroroflink: 'Invalid Linktree Link. Please Enter Correct Format.',
         outline: 'red',
       });
     } else if (
@@ -296,7 +296,7 @@ class LinkSelectComponent extends React.Component<any, any> {
       this.state.currentSocial.name == 'Calendly'
     ) {
       this.setState({
-        erroroflink: 'Invalid Calendly Link, please enter in correct format.',
+        erroroflink: 'Invalid Calendly Link. Please Enter Correct Format.',
         outline: 'red',
       });
     } else if (
@@ -306,7 +306,7 @@ class LinkSelectComponent extends React.Component<any, any> {
       this.state.currentSocial.name == 'Yelp'
     ) {
       this.setState({
-        erroroflink: 'Invalid Yelp Link, please enter in correct format.',
+        erroroflink: 'Invalid Yelp Link. Please Enter Correct Format.',
         outline: 'red',
       });
     } else if (
@@ -316,7 +316,7 @@ class LinkSelectComponent extends React.Component<any, any> {
       this.state.currentSocial.name == 'Custom Link'
     ) {
       this.setState({
-        erroroflink: 'Invalid link, please enter in correct format.',
+        erroroflink: 'Invalid Custom Link. Please Enter Correct Format.',
         outline: 'red',
       });
     } else {
@@ -407,7 +407,7 @@ class LinkSelectComponent extends React.Component<any, any> {
       item.name == 'Address'
     ) {
       this.setState({
-        labels: 'Street, City, State ZipCode',
+        labels: 'Street, City, State ZipCode, Country',
         title: 'address',
         keyboard: 'url',
       });

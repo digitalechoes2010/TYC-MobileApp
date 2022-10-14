@@ -55,7 +55,7 @@ class ProfileSetupScreen extends Component<any, any> {
     /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
     
     addressRegExp =
-    /^[a-zA-Z0-9\s]+\,\s[a-zA-Z0-9\s]+\,\s[a-zA-Z0-9\s]+\,\s[a-zA-Z\s]*$/;
+    /^[a-zA-Z0-9\s]+\,\s[a-zA-Z0-9\s]+\,\s[a-zA-Z\s]+\s[0-9]+\,\s[a-zA-Z\s]*$/;
   openActionSheet = () => {
     this.ActionSheet.show();
   };
