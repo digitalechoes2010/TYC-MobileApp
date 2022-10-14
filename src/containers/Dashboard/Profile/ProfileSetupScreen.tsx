@@ -30,7 +30,9 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {showTost} from '../../../utils/helper';
 import Loader from '../../../components/Loader';
 import axios from 'axios';
-import {decode as atob, encode as btoa} from 'base-64';
+// import {decode as atob, encode as btoa} from 'base-64';
+import {decode as atob, encode as btoa} from 'js-base64';
+import {phone} from 'phone';
 import { Buffer } from "buffer";
 import { getCountryCallingCodeAsync } from 'react-native-country-picker-modal/lib/CountryService';
 class ProfileSetupScreen extends Component<any, any> {
@@ -61,7 +63,7 @@ class ProfileSetupScreen extends Component<any, any> {
   };
   x='';
   twilioFunction = async (values:any) => {
-    if (this.state.changed == false) {
+    if (this.state.changed === false) {
       if(this.state.valueChanged === true) {
       this.setState({changed: true});
       console.log("SSSS", this.state.changed);
@@ -186,8 +188,23 @@ class ProfileSetupScreen extends Component<any, any> {
     }
   };
 
+  phoneFunction = async (values:any) => {
+    if (this.state.changed === false) {
+      if(this.state.valueChanged === true && phone(values).isValid === true) {
+        this.setState({changed: true});
+        this.setState({countryCodeState: phone(values).countryIso2});
+        this.setState({nationalFormatState: values.replace(phone(values).countryCode, "")});
+        console.log("Number Full Details:", phone(values));
+      } else {
+        this.setState({countryCodeState: this.props.userData.gender});
+        this.setState({nationalFormatState: this.props.userData.userBio});
+        console.log("Invalid Number Format.");
+       }
+    }
+  }
+
   trimFunction = async (values:any) => {
-    await this.twilioFunction(values.userBio);
+    await this.phoneFunction(values.userBio);
     const name = values.name;
     const address = values.address;
     const gender = this.state.countryCodeState;
@@ -204,14 +221,14 @@ class ProfileSetupScreen extends Component<any, any> {
     console.log("NAME", name);
     console.log("GENDER", gender);
     console.log("ADDRESS", address);
-    console.log("User BIO", userBio);
+    console.log("NUMBER", userBio);
     await this.props.doUserUpdate(updatedObject);
     Alert.alert('Success', 'Information Successfully Updated.');
   };
 
   handleSubmit = (values: any) => {
     this.trimFunction(values);
-    console.log(values);
+    console.log("Updated Values:", values);
   };
   render() {
     const {imgData, camLoading} = this.state;
@@ -400,7 +417,7 @@ class ProfileSetupScreen extends Component<any, any> {
                       <PhoneInput
                         placeholder="Enter Phone Number"
                         defaultCode={
-                          userData.gender.length !== 0 ? userData.gender : 'US'
+                          userData.gender ? userData.gender : 'US'
                         }
                         value={values.userBio}
                         disabled={false}
