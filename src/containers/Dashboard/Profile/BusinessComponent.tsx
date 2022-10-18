@@ -92,7 +92,7 @@ const BusinessComponent = (props: any) => {
         dispatch(setUserdata(data.data));
       })
       .catch((error: any) => {
-        Alert.alert('error', 'Something Went Wrong.');
+        Alert.alert('Error', 'Something Went Wrong.');
       })
       .finally(() => {
         setShowItem(false);
@@ -179,7 +179,7 @@ const BusinessComponent = (props: any) => {
         setUserdata({medias: mediaData.filter((item: any) => item.id != e.id)}),
       );
     } else {
-      Alert.alert('error', 'Something Went Wrong.');
+      Alert.alert('Error', 'Something Went Wrong.');
     }
     hideDialog();
   };

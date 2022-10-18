@@ -127,11 +127,11 @@ const styles = StyleSheet.create({
   //   padding: 5,
   //   backgroundColor: '#fff',
   // },
-  // mediaContainer: {
-  //   flexDirection: 'row',
-  //   flexWrap: 'wrap',
-  //   marginHorizontal: -metrics.moderateScale(9),
-  // },
+  mediaContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between'
+  },
   // linkTxt: {
   //   fontWeight: 'bold',
   //   fontSize: metrics.moderateScale(22),
@@ -328,12 +328,12 @@ const styles = StyleSheet.create({
   // borderStyleHighLighted: {
   //   borderColor: '#03DAC6',
   // },
-  // error: {
-  //   fontSize: metrics.moderateScale(12),
-  //   color: '#FF0D10',
-  //   alignSelf: 'flex-end',
-  //   // marginTop: 10,
-  // },
+  error: {
+    fontSize: metrics.moderateScale(12),
+    color: '#FF0D10',
+    alignSelf: 'flex-end',
+    marginTop: 10,
+  },
   // paddingLeft: {
   //   paddingLeft: 5,
   // },

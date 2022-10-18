@@ -364,8 +364,8 @@ const PublicProfile = ({navigation, route}: any) => {
             disabled={userData ? false : true}
             onPress={() =>
               openContactForm(
-                userData.name ?? userData.username,
-                userData.email,
+                userData.name ? userData.name : userData.username,
+                userData.buisnessCard && Array.isArray(userData.buisnessCard) ? userData.buisnessCard[1].uri : userData.email,
                 userData.userBio,
                 userData.address,
                 userData.gender,

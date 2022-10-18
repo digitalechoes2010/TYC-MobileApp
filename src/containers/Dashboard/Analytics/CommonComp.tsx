@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Dimensions} from 'react-native';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import {Button, withTheme} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
-import {VictoryBar, VictoryChart, VictoryTheme} from 'victory-native';
+import {BarChart} from 'react-native-chart-kit';
 import GDText from '../../../components/GreadientText';
 import Loader from '../../../components/Loader';
 import {TopApps} from '../../../components/TopApps';
@@ -76,22 +76,52 @@ class CommonComp extends Component<any, any> {
             <Text style={styles.subTitle}>
               Contacts made during last 7 days
             </Text>
-            <VictoryChart theme={VictoryTheme.material} domainPadding={{x: 20}}>
-              <VictoryBar
-                // labelComponent={<VictoryLabel dy={3} />}
-                // labels={({datum}) => `tap: ${datum.value}`}
-                barRatio={0.5}
-                data={this.state.weeklyData}
-                x="week"
-                y="value"
-                style={{data: {fill: '#c43a31'}}}
-                animate={{
-                  duration: 2000,
-                  onLoad: {duration: 1000},
+            <View style={{padding: 10, marginTop: 25, width: Dimensions.get("window").width, alignItems: 'center'}}>
+              <View style={{top: '4.5%', left: '0.375%', position: 'absolute', zIndex: 1, height: 220, alignItems: 'center', justifyContent: 'center'}}>
+                <Text style={{transform: [{rotate: '270deg'}], fontWeight: '500'}}>Daily Contacts</Text>
+              </View>
+              <BarChart
+                data={{
+                  labels: [
+                    this.state.weeklyData[0].week,
+                    this.state.weeklyData[1].week,
+                    this.state.weeklyData[2].week,
+                    this.state.weeklyData[3].week,
+                    this.state.weeklyData[4].week,
+                    this.state.weeklyData[5].week,
+                    this.state.weeklyData[6].week
+                  ],
+                  datasets: [
+                    {
+                      data: [
+                        this.state.weeklyData[0].value,
+                        this.state.weeklyData[1].value,
+                        this.state.weeklyData[2].value,
+                        this.state.weeklyData[3].value,
+                        this.state.weeklyData[4].value,
+                        this.state.weeklyData[5].value,
+                        this.state.weeklyData[6].value
+                      ],
+                    },
+                  ],
                 }}
-                // categories={{y: ['10']}}
+                width={Dimensions.get("window").width - 30}
+                height={220}
+                fromZero={true}
+                withHorizontalLabels={false}
+                showBarTops={true}
+                showValuesOnTopOfBars={true}
+                chartConfig={{
+                  backgroundColor: "#FFFFFF",
+                  backgroundGradientFrom: "#FFFFFF",
+                  backgroundGradientTo: "#FFFFFF",
+                  decimalPlaces: 0,
+                  barPercentage: 0.5,
+                  color: (opacity = 1) => `rgba(196, 58, 49, ${opacity})`,
+                  labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                }}
               />
-            </VictoryChart>
+            </View>
           </View>
 
           <GDText
@@ -192,7 +222,7 @@ const styles = StyleSheet.create({
   topAppText: {
     fontSize: metrics.moderateScale(30),
     fontWeight: 'bold',
-    marginTop: 22,
+    marginTop: 25,
   },
   refreshBox: {
     height: 30,

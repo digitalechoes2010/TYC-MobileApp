@@ -16,6 +16,7 @@ import {Button, Text, TextInput, withTheme} from 'react-native-paper';
 import profileStyles from '../Styles/ProfileStyles';
 import styles from '../../AuthContainer/SignIn/LoginStyle';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import theme from '../../../config/themeConfig';
 import ActionSheet from 'react-native-actionsheet';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
@@ -24,6 +25,10 @@ import {Formik, validateYupSchema} from 'formik';
 import PhoneInput from 'react-native-phone-number-input';
 import * as yup from 'yup';
 import {Dispatch} from 'redux';
+import apiClient from '../../../config/clients';
+import ApiConfig from '../../../config/apiConfig';
+import {useDispatch} from 'react-redux';
+import {setUserdata} from '../../../store/Actions/UserActions';
 import {userUpdateRequest} from '../../../store/Actions/UserActions';
 import {fileUploadRequest} from '../../../store/Actions/file-manager.action';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -42,16 +47,39 @@ class ProfileSetupScreen extends Component<any, any> {
     this.state = {
       imageData: undefined,
       camLoading: false,
-      countryCodeState: '',
-      nationalFormatState: '',
-      changed:false,
+      countryCodeState: this.props.userData.gender,
+      nationalFormatState: this.props.userData.userBio,
+      changed: false,
       valueChanged: false,
+      inputData: {
+        phone: '',
+        email: '',
+        skills: '',
+        job: '',
+        industry: '',
+        education: '',
+        interests: '',
+        address: '',
+      }
     };
   }
   
   componentDidMount() {
     LogBox.ignoreLogs(['Animated: `useNativeDriver`']);
+    this.loadData();
   }
+
+  loadData = () => {
+    if (
+      this.props.userData.buisnessCard &&
+      this.props.userData.buisnessCard.length > 0
+    ) {
+      this.props.userData.buisnessCard.map((e: any) => {
+      this.state.inputData[e.name] = e.uri;
+      });
+    }
+    this.setState({inputData: Object.assign({}, this.state.inputData)});
+  };
 
   phoneRegExp =
     /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
@@ -188,48 +216,89 @@ class ProfileSetupScreen extends Component<any, any> {
     }
   };
 
-  phoneFunction = async (values:any) => {
-    if (this.state.changed === false) {
-      if(this.state.valueChanged === true && phone(values).isValid === true) {
-        this.setState({changed: true});
-        this.setState({countryCodeState: phone(values).countryIso2});
-        this.setState({nationalFormatState: values.replace(phone(values).countryCode, "")});
-        console.log("Number Full Details:", phone(values));
-      } else {
-        this.setState({countryCodeState: this.props.userData.gender});
-        this.setState({nationalFormatState: this.props.userData.userBio});
-        console.log("Invalid Number Format.");
-       }
+  updateBusinessCard = async (params: any) => {
+    let payload: {uri: any; name: string}[] = [];
+    Object.keys(params).map(function (key, index) {
+      payload.push({
+        uri: params[key],
+        name: key,
+      });
+    });
+    await apiClient
+      .patch(ApiConfig.buisnessCard, {
+        buisnessCard: payload,
+      })
+      .then((data: any) => {
+        this.props.doUpdateBusinessCard(data.data);
+      })
+      .catch((error: any) => {
+        Alert.alert('Error', 'Something Went Wrong.');
+      })
+  };
+
+  trimFunction = async (values:any) => {
+    if(this.state.valueChanged === true && phone(values.userBio).isValid === true) {
+      const buisnessData = {
+        phone: Array.isArray(this.props.userData.buisnessCard) ? this.props.userData.buisnessCard[0].uri : '',
+        email: Array.isArray(this.props.userData.buisnessCard) ? values.email : '',
+        skills: Array.isArray(this.props.userData.buisnessCard) ? this.props.userData.buisnessCard[2].uri : '',
+        job: Array.isArray(this.props.userData.buisnessCard) ? this.props.userData.buisnessCard[3].uri : '',
+        industry: Array.isArray(this.props.userData.buisnessCard) ? values.company : '',
+        education: Array.isArray(this.props.userData.buisnessCard) ? this.props.userData.buisnessCard[5].uri : '',
+        interests: Array.isArray(this.props.userData.buisnessCard) ? this.props.userData.buisnessCard[6].uri : '',
+        address: Array.isArray(this.props.userData.buisnessCard) ? this.props.userData.buisnessCard[7].uri : '',
+      }
+      this.setState({inputData: buisnessData});
+      this.setState({countryCodeState: phone(values.userBio).countryIso2});
+      this.setState({nationalFormatState: values.userBio.replace(phone(values.userBio).countryCode, "")});
+      const updatedObject = {
+        name: values.name,
+        address: values.address,
+        gender: this.state.countryCodeState,
+        userBio: this.state.nationalFormatState,
+        mobile: '',
+        callingCode: undefined,
+        countryCode: undefined,
+      };
+      await this.updateBusinessCard(this.state.inputData);
+      await this.props.doUserUpdate(updatedObject);
+      Alert.alert('Success', 'Information Successfully Updated.');
+      console.log("Number Full Details:", phone(values));
+    } else if(this.state.valueChanged === true && phone(values).isValid === false) {
+      this.setState({countryCodeState: this.props.userData.gender});
+      this.setState({nationalFormatState: this.props.userData.userBio});
+      Alert.alert('Error', 'Invalid Number Format.');
+    } else {
+      const buisnessData = {
+        phone: Array.isArray(this.props.userData.buisnessCard) ? this.props.userData.buisnessCard[0].uri : '',
+        email: Array.isArray(this.props.userData.buisnessCard) ? values.email : '',
+        skills: Array.isArray(this.props.userData.buisnessCard) ? this.props.userData.buisnessCard[2].uri : '',
+        job: Array.isArray(this.props.userData.buisnessCard) ? this.props.userData.buisnessCard[3].uri : '',
+        industry: Array.isArray(this.props.userData.buisnessCard) ? values.company : '',
+        education: Array.isArray(this.props.userData.buisnessCard) ? this.props.userData.buisnessCard[5].uri : '',
+        interests: Array.isArray(this.props.userData.buisnessCard) ? this.props.userData.buisnessCard[6].uri : '',
+        address: Array.isArray(this.props.userData.buisnessCard) ? this.props.userData.buisnessCard[7].uri : '',
+      }
+      this.setState({inputData: buisnessData});
+      const updatedObject = {
+        name: values.name,
+        address: values.address,
+        gender: this.state.countryCodeState,
+        userBio: this.state.nationalFormatState,
+        mobile: '',
+        callingCode: undefined,
+        countryCode: undefined,
+      };
+      await this.updateBusinessCard(this.state.inputData);
+      await this.props.doUserUpdate(updatedObject);
+      Alert.alert('Success', 'Information Successfully Updated.');
     }
   }
 
-  trimFunction = async (values:any) => {
-    await this.phoneFunction(values.userBio);
-    const name = values.name;
-    const address = values.address;
-    const gender = this.state.countryCodeState;
-    const userBio = this.state.nationalFormatState;
-    const updatedObject = {
-      address: address,
-      callingCode: undefined,
-      countryCode: undefined,
-      gender: gender,
-      mobile: '',
-      name: name,
-      userBio: userBio,
-    };
-    console.log("NAME", name);
-    console.log("GENDER", gender);
-    console.log("ADDRESS", address);
-    console.log("NUMBER", userBio);
-    await this.props.doUserUpdate(updatedObject);
-    Alert.alert('Success', 'Information Successfully Updated.');
+  handleSubmit = async (values: any) => {
+    await this.trimFunction(values);
   };
 
-  handleSubmit = (values: any) => {
-    this.trimFunction(values);
-    console.log("Updated Values:", values);
-  };
   render() {
     const {imgData, camLoading} = this.state;
     const {userData, fileReducer} = this.props;
@@ -270,6 +339,8 @@ class ProfileSetupScreen extends Component<any, any> {
             <Formik
               initialValues={{
                 name: userData?.name ? userData?.name : '',
+                email: Array.isArray(userData.buisnessCard) ? userData.buisnessCard[1].uri : '',
+                company: Array.isArray(userData.buisnessCard) ? userData.buisnessCard[4].uri : '',
                 mobile: userData?.countryCode
                   ? userData.mobile.replace(userData.callingCode, '')
                   : userData.mobile,
@@ -278,6 +349,7 @@ class ProfileSetupScreen extends Component<any, any> {
                 gender: this.state.countryCodeState,
                 address: userData?.address,
                 userBio: userData?.userBio,
+
               }}
               onSubmit={values => this.handleSubmit(values)}
               validationSchema={yup.object().shape({
@@ -286,6 +358,7 @@ class ProfileSetupScreen extends Component<any, any> {
                   .string()
                   .matches(this.addressRegExp, 'Invalid Address Format'),
                   // .required('Mobile is required'),
+                  email: yup.string().email('Invalid Email Format'),
               })}>
               {({
                 values,
@@ -320,6 +393,51 @@ class ProfileSetupScreen extends Component<any, any> {
                       </View>
                       {touched.name && errors.name && (
                         <Text style={styles.error}>{errors.name}</Text>
+                      )}
+                    </View>
+                    <View style={{flexDirection: 'column', marginBottom: 10}}>
+                      <View style={profileStyles.formRow}>
+                        <MaterialCommunityIcons
+                          name={'email'}
+                          size={25}
+                          style={profileStyles.formIcon}
+                        />
+                        <TextInput
+                          style={[styles.textInput, profileStyles.input]}
+                          label={'Email'}
+                          value={values.email}
+                          placeholder={'Email Address'}
+                          mode={'outlined'}
+                          outlineColor={theme.colors.background}
+                          onBlur={() => setFieldTouched('email')}
+                          onChangeText={handleChange('email')}
+                        />
+                      </View>
+                      {touched.email && errors.email && (
+                        <Text style={styles.error}>{errors.email}</Text>
+                      )}
+                    </View>
+
+                    <View style={{flexDirection: 'column', marginBottom: 10}}>
+                      <View style={profileStyles.formRow}>
+                        <Icon
+                          name={'building'}
+                          size={25}
+                          style={profileStyles.formIcon}
+                        />
+                        <TextInput
+                          style={[styles.textInput, profileStyles.input]}
+                          label={'Company'}
+                          value={values.company}
+                          placeholder={'Company'}
+                          mode={'outlined'}
+                          outlineColor={theme.colors.background}
+                          onBlur={() => setFieldTouched('company')}
+                          onChangeText={handleChange('company')}
+                        />
+                      </View>
+                      {touched.company && errors.company && (
+                        <Text style={styles.error}>{errors.company}</Text>
                       )}
                     </View>
                     {userData?.countryCode && userData?.mobile && (
@@ -457,6 +575,8 @@ class ProfileSetupScreen extends Component<any, any> {
               )}
             </Formik>
 
+
+
             <ActionSheet
               ref={o => (this.ActionSheet = o)}
               title={'Choose One'}
@@ -481,6 +601,7 @@ const mapStateToProps = (state: any, ownProps: any) => {
 };
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   doUserUpdate: (request: any) => dispatch(userUpdateRequest(request)),
+  doUpdateBusinessCard: (request: any) => dispatch(setUserdata(request)),
   uploadFile: (files: object) => {
     dispatch(fileUploadRequest({files: files}));
   },
@@ -493,4 +614,3 @@ export default connect(
 function values(values: any) {
   throw new Error('Function not implemented.');
 }
-
