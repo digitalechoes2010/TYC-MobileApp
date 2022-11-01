@@ -36,7 +36,7 @@ import {showTost} from '../../../utils/helper';
 import Loader from '../../../components/Loader';
 import axios from 'axios';
 // import {decode as atob, encode as btoa} from 'base-64';
-import {decode as atob, encode as btoa} from 'js-base64';
+// import {decode as atob, encode as btoa} from 'js-base64';
 import {phone} from 'phone';
 import { Buffer } from "buffer";
 import { getCountryCallingCodeAsync } from 'react-native-country-picker-modal/lib/CountryService';
@@ -90,40 +90,40 @@ class ProfileSetupScreen extends Component<any, any> {
     this.ActionSheet.show();
   };
   x='';
-  twilioFunction = async (values:any) => {
-    if (this.state.changed === false) {
-      if(this.state.valueChanged === true) {
-      this.setState({changed: true});
-      console.log("SSSS", this.state.changed);
-      const username = 'AC57b5522b8d53aa6c6e2dd566345eb975';
-      const password = '0938c49ebc48e94368ea639720eb96d9';
-      await axios
-      .get(
-        'https://lookups.twilio.com/v1/PhoneNumbers/' + values,
-        {
-          headers: {
-          Authorization: 'Basic ' + btoa(username + ':' + password)
-          }
-        }
-      )
-      .then(response => {
-        console.log("Twilio Response", response.data);
-        this.setState({countryCodeState: response.data.country_code});
-        this.setState({nationalFormatState: response.data.national_format});
-        console.log('Country Code:',this.state.countryCodeState);
-        console.log('National Format:',this.state.nationalFormatState);
-        this.x=response.data.country_code;
-      })
-      .catch(err => {
-        console.log('Twilio Error:', err);
-      });
-     } else {
-      this.setState({countryCodeState: this.props.userData.gender});
-      this.setState({nationalFormatState: this.props.userData.userBio});
-      console.log("No Phone", values.gender);
-     }
-    } 
-}
+  // twilioFunction = async (values:any) => {
+  //   if (this.state.changed === false) {
+  //     if(this.state.valueChanged === true) {
+  //     this.setState({changed: true});
+  //     console.log("SSSS", this.state.changed);
+  //     const username = 'AC57b5522b8d53aa6c6e2dd566345eb975';
+  //     const password = '0938c49ebc48e94368ea639720eb96d9';
+  //     await axios
+  //     .get(
+  //       'https://lookups.twilio.com/v1/PhoneNumbers/' + values,
+  //       {
+  //         headers: {
+  //         Authorization: 'Basic ' + btoa(username + ':' + password)
+  //         }
+  //       }
+  //     )
+  //     .then(response => {
+  //       console.log("Twilio Response", response.data);
+  //       this.setState({countryCodeState: response.data.country_code});
+  //       this.setState({nationalFormatState: response.data.national_format});
+  //       console.log('Country Code:',this.state.countryCodeState);
+  //       console.log('National Format:',this.state.nationalFormatState);
+  //       this.x=response.data.country_code;
+  //     })
+  //     .catch(err => {
+  //       console.log('Twilio Error:', err);
+  //     });
+  //    } else {
+  //     this.setState({countryCodeState: this.props.userData.gender});
+  //     this.setState({nationalFormatState: this.props.userData.userBio});
+  //     console.log("No Phone", values.gender);
+  //    }
+  //   } 
+  // }
 
   requestCameraPermission = async () => {
     try {
@@ -339,8 +339,8 @@ class ProfileSetupScreen extends Component<any, any> {
             <Formik
               initialValues={{
                 name: userData?.name ? userData?.name : '',
-                email: Array.isArray(userData.buisnessCard) ? userData.buisnessCard[1].uri : '',
-                company: Array.isArray(userData.buisnessCard) ? userData.buisnessCard[4].uri : '',
+                email: userData.buisnessCard && Array.isArray(userData.buisnessCard) ? userData.buisnessCard[1].uri : '',
+                company: userData.buisnessCard && Array.isArray(userData.buisnessCard) ? userData.buisnessCard[4].uri : '',
                 mobile: userData?.countryCode
                   ? userData.mobile.replace(userData.callingCode, '')
                   : userData.mobile,

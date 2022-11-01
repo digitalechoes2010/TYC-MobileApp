@@ -15,6 +15,9 @@ import {
   TouchableOpacity,
   View,
   Platform,
+  Modal,
+  Animated,
+  SafeAreaView
 } from 'react-native';
 import {Switch} from 'react-native-switch';
 import {Card,Text} from 'react-native-paper';
@@ -35,6 +38,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import apiClient from '../../config/clients';
 import ApiConfig from '../../config/apiConfig';
 import {setUserdata} from '../../store/Actions/UserActions';
+import * as OpenAnything from 'react-native-openanything';
 
 class CustomDrawer extends React.Component<any, any> {
   constructor(props: any) {
@@ -42,6 +46,7 @@ class CustomDrawer extends React.Component<any, any> {
     this.state = {
       dis: false,
       isSwitchOn: this.props.userData.isActive,
+      visible: false,
     };
   }
   onToggleSwitch = () => {
@@ -71,16 +76,60 @@ class CustomDrawer extends React.Component<any, any> {
     return <Text style={{color: focused ? '#7cc' : '#000'}}>{title}</Text>;
   };
 
+  ModalPopup = ({visible, children}:any) => {
+    const [showModal, setShowModal] = React.useState(visible);
+    const scaleValue = React.useRef(new Animated.Value(0)).current;
+    React.useEffect(() => {
+      toggleModal();
+    }, [visible]);
+    const toggleModal = () => {
+      if (visible) {
+        setShowModal(true);
+        Animated.spring(scaleValue, {
+          toValue: 1,
+          useNativeDriver: true,
+        }).start();
+      } else {
+        setTimeout(() => setShowModal(false), 200);
+        Animated.timing(scaleValue, {
+          toValue: 0,
+          duration: 300,
+          useNativeDriver: true,
+        }).start();
+      }
+    };
+    return (
+      <Modal transparent visible={showModal}>
+        <View style={{flex: 1, backgroundColor: 'rgba(0,0,0,0.5)', justifyContent: 'center', alignItems: 'center'}}>
+          <Animated.View
+            style={[{width: '80%', backgroundColor: '#FFFFFF', padding: 20, borderRadius: 10}, {transform: [{scale: scaleValue}]}]}>
+            {children}
+          </Animated.View>
+        </View>
+      </Modal>
+    );
+  };
+
   render() {
     const {props} = this;
     const {userData, fileReducer} = props;
+    const emailReceiver = "info@tapyourchip.com";
+    const emailSubject = "TYC Account Deletion";
+    const emailBody = "Dear Admin," + '\n' + '\n' + 
+      "Hope this email finds you well and safe." + '\n' + '\n' +
+      "Kindly accept my request to delete this account as soon as possible." + '\n' + '\n' +
+      "TYC Username: " + userData.username + '\n' + '\n' +
+      "Best Regards.";
+
+    const deleteAccount = () => {
+      this.props.clearStore(); 
+      setTimeout(function() {OpenAnything.Email(emailReceiver, emailSubject, emailBody)}, 500)
+    };
+
     return (
-      <DrawerContentScrollView
-        {...props}
-        style={{
-          backgroundColor: '#fff',
-          flex: 1,
-        }}>
+      <SafeAreaView style={{flex: 1}}>
+        <DrawerContentScrollView
+        {...props}>
         <View
           style={{
             flexDirection: 'column',
@@ -90,22 +139,20 @@ class CustomDrawer extends React.Component<any, any> {
           <View>
             <Card style={drawerStyles.userInfoContainer}>
               <Card.Content>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                   {fileReducer.pending ? (
                     <Loader />
                   ) : (
                     <Image
                       source={{
-                        uri:
-                          userData.profilePic.length > 2
-                            ? userData.profilePic
-                            : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHe330tYy_U_3UN0DmUSbGoFbXigdIQglDAA&usqp=CAU',
+                        uri: userData.profilePic.length > 2
+                          ? userData.profilePic
+                          : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHe330tYy_U_3UN0DmUSbGoFbXigdIQglDAA&usqp=CAU',
                       }}
                       resizeMode={'cover'}
-                      style={drawerStyles.userImage}
-                    />
+                      style={drawerStyles.userImage} />
                   )}
-                  <View style={Platform.OS=='android' ? drawerStyles.userDetail : drawerStyles.userDetailIos}>
+                  <View style={Platform.OS == 'android' ? drawerStyles.userDetail : drawerStyles.userDetailIos}>
                     <Text
                       style={drawerStyles.userName}
                       numberOfLines={1}
@@ -125,11 +172,7 @@ class CustomDrawer extends React.Component<any, any> {
                         circleActiveColor={'#FB8C1A'}
                         value={this.state.isSwitchOn}
                         disabled={this.state.dis}
-                        onValueChange={() => this.onToggleSwitch()}
-                      />
-                      {/* <Text style={drawerStyles.onOff}>
-                        {this.state.isSwitchOn ? 'On' : 'Off'}
-                      </Text> */}
+                        onValueChange={() => this.onToggleSwitch()} />
                     </View>
                   </View>
                 </View>
@@ -140,9 +183,7 @@ class CustomDrawer extends React.Component<any, any> {
                     marginTop: 10,
                   }}>
                   <View style={{}}>
-                    <Text style={drawerStyles.urlText}>
-                      {makeLink(userData)}
-                    </Text>
+                    <Text style={drawerStyles.urlText}>{makeLink(userData)}</Text>
                   </View>
                 </View>
               </Card.Content>
@@ -165,8 +206,7 @@ class CustomDrawer extends React.Component<any, any> {
                 <Image
                   source={require('../../assets/images/icons/help.png')}
                   resizeMode={'cover'}
-                  style={{width: 26, height: 26, tintColor: 'gray'}}
-                />
+                  style={{ width: 26, height: 26, tintColor: 'gray' }} />
                 <Text
                   style={{
                     fontSize: metrics.moderateScale(14),
@@ -177,13 +217,34 @@ class CustomDrawer extends React.Component<any, any> {
                 </Text>
               </View>
             </TouchableOpacity>
-
             <TouchableOpacity
-              style={{flexDirection: 'column', marginLeft: 20}}
-              onPress={() => {
-                this.props.clearStore();
-              }}>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              style={{
+                flexDirection: 'column',
+                marginLeft: metrics.moderateScale(17.5),
+                marginBottom: metrics.moderateScale(20),
+              }}
+              onPress={() => this.setState({ visible: true })}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  marginBottom: 5,
+                }}>
+                <MaterialCommunityIcons name={'account-remove'} size={24} color={'gray'} />
+                <Text
+                  style={{
+                    fontSize: metrics.moderateScale(14),
+                    paddingLeft: metrics.moderateScale(30),
+                    justifyContent: 'center',
+                  }}>
+                  Delete Account
+                </Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{ flexDirection: 'column', marginLeft: 20 }}
+              onPress={() => this.props.clearStore()}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Icon name={'sign-out'} size={24} color={'gray'}></Icon>
                 <Text
                   style={{
@@ -204,7 +265,23 @@ class CustomDrawer extends React.Component<any, any> {
             <SvgXml xml={Logo} width={90} height={90} />
           </View>
         </View>
-      </DrawerContentScrollView>
+        </DrawerContentScrollView>
+        <View>
+          <this.ModalPopup visible={this.state.visible}>
+            <Text style={{fontWeight: 'bold', fontSize: 20, color: '#000000', alignSelf: 'center', textAlign: 'center'}}>Are You Sure You Want To Permanently Delete This Account?</Text>
+            <TouchableOpacity
+              style={{width: '100%', backgroundColor: '#FB8C1A', padding: 10, borderRadius: 30, alignItems: 'center', marginTop: 30}}
+              onPress={() => deleteAccount()}>
+              <Text style={{fontWeight: '500', fontSize: 14, color: '#FFFFFF' }}>Delete</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{width: '100%', backgroundColor: '#CD06F7', padding: 10, borderRadius: 30, alignItems: 'center', marginTop: 30}}
+              onPress={() => this.setState({ visible: false })}>
+              <Text style={{ fontWeight: '500', fontSize: 14, color: '#FFFFFF' }}>Cancel</Text>
+            </TouchableOpacity>
+          </this.ModalPopup>
+        </View>
+      </SafeAreaView>
     );
   }
 }
