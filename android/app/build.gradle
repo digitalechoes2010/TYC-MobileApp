@@ -137,8 +137,8 @@ packagingOptions {
         minSdkVersion rootProject.ext.minSdkVersion
         missingDimensionStrategy 'react-native-camera', 'general'
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 70
-        versionName "1.7.1"
+        versionCode 75
+        versionName "1.7.2"
     }
     splits {
         abi {

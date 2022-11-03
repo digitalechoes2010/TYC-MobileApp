@@ -241,6 +241,7 @@ class CustomDrawer extends React.Component<any, any> {
                 </Text>
               </View>
             </TouchableOpacity>
+
             <TouchableOpacity
               style={{ flexDirection: 'column', marginLeft: 20 }}
               onPress={() => this.props.clearStore()}>
@@ -262,7 +263,10 @@ class CustomDrawer extends React.Component<any, any> {
               alignSelf: 'center',
               marginBottom: metrics.moderateScale(100),
             }}>
-            <SvgXml xml={Logo} width={90} height={90} />
+            <View  style={{alignSelf: 'center'}}>
+              <SvgXml xml={Logo} width={90} height={90} />
+            </View>
+            <Text style={{fontSize: metrics.moderateScale(14)}}>Tap Your Chip © 2022</Text>
           </View>
         </View>
         </DrawerContentScrollView>

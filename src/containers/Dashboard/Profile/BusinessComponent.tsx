@@ -311,14 +311,15 @@ const BusinessComponent = (props: any) => {
           visible={showItem}
           onDismiss={hideDialog}
           style={styles.dialogBoxBuss}>
-          <Dialog.Actions style={styles.dgAc}>
-            <Button
-              onPress={hideDialog}
-              icon={() => <Icon name={'close-circle-outline'} size={40} />}
-            />
-          </Dialog.Actions>
-
-          <Dialog.Title style={styles.dgTitle}>{cuItem.name}</Dialog.Title>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Dialog.Actions style={styles.dgAc}>
+              <Button
+                onPress={hideDialog}
+                icon={() => <Icon name={'close-circle-outline'} size={40} />}
+              />
+            </Dialog.Actions>
+            <Dialog.Title style={styles.dgTitle}>{cuItem.name}</Dialog.Title>
+          </View>
           <Dialog.Content>
             {dgType == 'BCARD' && (
               <BusinessCardDetails
@@ -379,11 +380,7 @@ const BusinessComponent = (props: any) => {
               </View>
             )}
             {dgType == 'BDOC' && (
-              <View
-                style={{
-                  height: metrics.moderateScale(150),
-                  alignItems: 'center',
-                }}>
+              <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
                 <Button
                   onPress={() => Linking.openURL(cuItem.url)}
                   mode={'contained'}

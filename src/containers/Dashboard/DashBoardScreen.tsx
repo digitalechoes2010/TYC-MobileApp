@@ -144,7 +144,7 @@ class DashBoardScreen extends Component<any, any> {
     if (check.data == null) {
       Alert.alert(
         'ALERT',
-        'You can only change this link once. Are you sure you want to proceed?',
+        'You can only change this username once. Are you sure you want to proceed?',
         [
           {
             text: 'NO',
@@ -184,7 +184,7 @@ class DashBoardScreen extends Component<any, any> {
     } else {
       Alert.alert(
         'Error',
-        'Link Already Taken. Please Choose Another.',
+        'Username Already Taken. Please Choose Another.',
       );
     }
   };
@@ -427,10 +427,9 @@ class DashBoardScreen extends Component<any, any> {
               </Dialog.Actions>
               <Dialog.Title
                 style={{
-                  alignSelf: 'center',
                   marginTop: metrics.verticalScale(14),
                 }}>
-                ENTER YOUR NEW LINK
+                ENTER YOUR USERNAME
               </Dialog.Title>
               <Dialog.Content>
                 <View
@@ -438,6 +437,10 @@ class DashBoardScreen extends Component<any, any> {
                     flexDirection: 'column',
                     // marginVertical: metrics.verticalScale(30),
                   }}>
+                  <Text style={{
+                    textAlign: 'center',
+                    marginBottom: metrics.verticalScale(25),
+                  }}>Your username will appear on your TYC link as tapyourchip.com/p/username</Text>
                   <Formik
                     initialValues={{
                       linkInput:
@@ -464,7 +467,7 @@ class DashBoardScreen extends Component<any, any> {
                           <View style={styles.inputContainerStyle}>
                             <TextInput
                               autoCapitalize="none"
-                              label="Choose your link"
+                              label="Enter Username"
                               mode={'outlined'}
                               value={values.linkInput}
                               onBlur={() => setFieldTouched('linkInput')}

@@ -95,7 +95,7 @@ const AuthBottom: FC<IProps> = ({seperatorText, handleSubmit}) => {
       </>
       )}
       <View style={styles.version}>
-          <Text>Version 1.7.0</Text>
+          <Text>Version 1.7.2</Text>
       </View>
     </View>
   );

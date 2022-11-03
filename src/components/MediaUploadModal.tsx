@@ -29,9 +29,6 @@ const MediaUploadModal = (props: any) => {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <View style={styles.mediaPicker}>
-              <Text style={styles.t1Black}>
-                {props.File ? props.File.name : 'No file selected'}
-              </Text>
               {props.isUploading ? (
                 <TouchableOpacity
                   onPress={() => {}}
@@ -49,6 +46,9 @@ const MediaUploadModal = (props: any) => {
                   <Text style={styles.t1}>PICK MEDIA</Text>
                 </TouchableOpacity>
               )}
+              <Text style={styles.t1Black}>
+                {props.File ? props.File.name : 'No file selected'}
+              </Text>
             </View>
 
             <TextInput
@@ -96,7 +96,6 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-
     backgroundColor: 'white',
     borderRadius: 20,
     padding: 35,
@@ -119,6 +118,7 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   addMediaBtn: {
+    alignSelf: 'flex-end',
     justifyContent: 'center',
     borderRadius: 100,
     backgroundColor: theme.colors.primary,
@@ -127,9 +127,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   mediaPicker: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
     width: '100%',
   },
   ModalBtn: {
@@ -177,7 +174,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: metrics.moderateScale(14),
-    marginBottom: 10,
+    marginVertical: 10,
   },
 
   dgAc: {

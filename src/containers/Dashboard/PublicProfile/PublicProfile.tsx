@@ -47,7 +47,7 @@ const PublicProfile = ({navigation, route}: any) => {
     return string.substring(0, lastIndexOfSpace);
   };
   
-  const openContactForm = (name: any, email: any, phone: any, address: any, countryCode: any) => {
+  const openContactForm = (name: any, email: any, phone: any, address: any, countryCode: any, company: any) => {
     
     if (email && phone && address) {
       let diallingCode = '';
@@ -94,6 +94,7 @@ const PublicProfile = ({navigation, route}: any) => {
           postCode: splitedZipCode,
           country: splitedCountryCode,
         }],
+        company: company,
       } 
     } else if (email && phone) {
       let diallingCode = '';
@@ -119,6 +120,7 @@ const PublicProfile = ({navigation, route}: any) => {
             number: '+' + diallingCode + ' ' + phone,
           },
         ],
+        company: company,
       } 
     } else if (email && address) {
       let fullAddress = address;
@@ -152,6 +154,7 @@ const PublicProfile = ({navigation, route}: any) => {
           postCode: splitedZipCode,
           country: splitedCountryCode,
         }],
+        company: company,
       } 
     } else if (phone && address) {
       let diallingCode = '';
@@ -192,6 +195,7 @@ const PublicProfile = ({navigation, route}: any) => {
           postCode: splitedZipCode,
           country: splitedCountryCode,
         }],
+        company: company,
       } 
     } else if (email) {
       var newPerson = {
@@ -204,6 +208,7 @@ const PublicProfile = ({navigation, route}: any) => {
             email: email,
           },
         ],
+        company: company,
       } 
     } else if (phone) {
       let diallingCode = '';
@@ -223,6 +228,7 @@ const PublicProfile = ({navigation, route}: any) => {
             number: '+' + diallingCode + ' ' + phone,
           },
         ],
+        company: company,
       } 
     } else if (address) {
       let fullAddress = address;
@@ -250,12 +256,14 @@ const PublicProfile = ({navigation, route}: any) => {
           postCode: splitedZipCode,
           country: splitedCountryCode,
         }],
+        company: company,
       } 
     } else {
       var newPerson = {
         displayName: name !== userData.username ? name : userData.username[0].toUpperCase() + userData.username.substring(1) + ' ' + userData.username[0].toUpperCase() + userData.username.substring(1),
         familyName: name !== userData.username ? removeFirstWord(name) : userData.username[0].toUpperCase() + userData.username.substring(1),
         givenName: name !== userData.username ? removeLastWord(name) : userData.username[0].toUpperCase() + userData.username.substring(1),
+        company: company,
       }
     };
 
@@ -369,6 +377,7 @@ const PublicProfile = ({navigation, route}: any) => {
                 userData.userBio,
                 userData.address,
                 userData.gender,
+                userData.buisnessCard && Array.isArray(userData.buisnessCard) ? userData.buisnessCard[4].uri : '',
               )
             }
             style={[

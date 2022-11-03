@@ -45,28 +45,27 @@ const styles = StyleSheet.create({
   //   bottom: 0,
   //   right: 0,
   // },
-  // dgTitle: {
-  //   alignSelf: 'center',
-  //   marginTop: metrics.verticalScale(20),
-  // },
-  // dgAc: {
-  //   paddingHorizontal: 0,
-  //   position: 'absolute',
-  //   right: 0,
-  // },
-  // dialogBoxBuss: {
-  //   maxWidth: metrics.moderateScale(400),
-  //   width: metrics.screenWidth - metrics.moderateScale(30),
-  //   alignSelf: 'center',
-  //   borderRadius: 25,
-  // },
-  // imgBOX: {
-  //   justifyContent: 'center',
-  //   alignSelf: 'center',
-  //   width: '100%',
-  //   height: '100%',
-  //   borderRadius: 10,
-  // },
+  dgTitle: {
+    marginTop: metrics.verticalScale(20),
+  },
+  dgAc: {
+    paddingHorizontal: 0,
+    position: 'absolute',
+    right: 0,
+  },
+  dialogBoxBuss: {
+    maxWidth: metrics.moderateScale(400),
+    width: metrics.screenWidth - metrics.moderateScale(30),
+    alignSelf: 'center',
+    borderRadius: 25,
+  },
+  imgBOX: {
+    justifyContent: 'center',
+    alignSelf: 'center',
+    width: '100%',
+    height: '100%',
+    borderRadius: 10,
+  },
   // editIconView: {
   //   width: metrics.moderateScale(35),
   //   height: metrics.moderateScale(35),
@@ -137,21 +136,20 @@ const styles = StyleSheet.create({
   //   fontSize: metrics.moderateScale(22),
   //   marginTop: metrics.moderateScale(23),
   // },
-  // t1: {
-  //   color: 'white',
-  //   textAlign: 'center',
-  //   fontWeight: 'bold',
-  //   fontSize: metrics.moderateScale(14),
-  // },
-  // addMediaBtn2: {
-  //   justifyContent: 'center',
-  //   marginTop: metrics.moderateScale(20),
-  //   borderRadius: 100,
-  //   backgroundColor: theme.colors.primary,
-  //   width: metrics.moderateScale(150),
-  //   height: metrics.moderateScale(45),
-  // },
-
+  t1: {
+    color: 'white',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: metrics.moderateScale(14),
+  },
+  addMediaBtn2: {
+    justifyContent: 'center',
+    marginTop: metrics.moderateScale(20),
+    borderRadius: 100,
+    backgroundColor: theme.colors.primary,
+    width: metrics.moderateScale(125),
+    height: metrics.moderateScale(45),
+  },
   addMediaBtn: {
     justifyContent: 'center',
     borderRadius: 100,
@@ -173,7 +171,6 @@ const styles = StyleSheet.create({
   //   height: '100%',
   //   flex: 0.9,
   // },
-
   inputContainerStyle: {
     marginBottom: 10,
   },
@@ -241,21 +238,21 @@ const styles = StyleSheet.create({
   // buttonContainer: {
   //   flex: 0.5,
   // },
-  // buttonContent: {
-  //   paddingHorizontal: metrics.moderateScale(20),
-  //   paddingVertical: metrics.verticalScale(5),
-  // },
+  buttonContent: {
+    paddingHorizontal: metrics.moderateScale(20),
+    paddingVertical: metrics.verticalScale(5),
+  },
   button: {
     alignSelf: 'center',
     borderRadius: 25,
     marginVertical: metrics.verticalScale(10),
     width: '80%',
   },
-  // buttonLabel: {
-  //   color: theme.colors.background,
-  //   textTransform: 'uppercase',
-  //   fontWeight: 'bold',
-  // },
+  buttonLabel: {
+    color: theme.colors.background,
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
+  },
   // rememContainer: {
   //   flexDirection: 'row',
   //   justifyContent: 'center',
@@ -273,9 +270,9 @@ const styles = StyleSheet.create({
   //   fontSize: metrics.moderateScale(15),
   //   fontWeight: 'bold',
   // },
-  // // SocialSignBlock: {
-  // //   marginVertical: metrics.verticalScale(40),
-  // // },
+  // SocialSignBlock: {
+  //  marginVertical: metrics.verticalScale(40),
+  // },
   // separatorTextBlock: {
   //   flex: 1,
   //   flexDirection: 'row',
@@ -324,7 +321,6 @@ const styles = StyleSheet.create({
   //   color: theme.colors.backdrop,
   //   backgroundColor: theme.colors.surface,
   // },
-
   // borderStyleHighLighted: {
   //   borderColor: '#03DAC6',
   // },
